@@ -26,7 +26,7 @@ const Main = () => {
         setPlayer={setPlayer}
         removePlayer={removePlayer}
       />
-      <Fight />
+      <Fight players={players} />
     </div>
   );
 };
