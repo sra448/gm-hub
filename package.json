@@ -1,22 +1,42 @@
 {
   "name": "gm-hub",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "A basic pen and paper fight management app",
   "scripts": {
     "start": "parcel index.html",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
-  "devDependencies": {
-    "parcel-bundler": "^1.10.3"
-  },
   "dependencies": {
     "@material-ui/core": "^3.3.2",
     "@material-ui/icons": "^3.0.1",
     "ramda": "^0.25.0",
     "react": "^16.7.0-alpha.0",
     "react-dom": "^16.7.0-alpha.0"
+  },
+  "devDependencies": {
+    "babel-eslint": "^10.0.1",
+    "eslint": "^5.8.0",
+    "eslint-config-last": "0.0.5",
+    "eslint-config-prettier": "^3.1.0",
+    "eslint-plugin-prettier": "^3.0.0",
+    "eslint-plugin-react": "^7.11.1",
+    "parcel-bundler": "^1.10.3",
+    "parcel-plugin-eslint": "^1.0.4",
+    "prettier": "^1.14.3"
+  },
+  "eslintConfig": {
+    "extends": [
+      "last",
+      "prettier/react",
+      "plugin:react/recommended"
+    ],
+    "env": {
+      "browser": true
+    },
+    "rules": {
+      "react/prop-types": 0
+    }
   }
 }
