@@ -82,7 +82,7 @@ const Players = ({ players, addPlayer, setPlayer, removePlayer }) => {
           />
         ))}
       </div>
-      <button onClick={onCreate}>add player</button>
+      <Button onClick={onCreate}>add player</Button>
     </div>
   );
 };

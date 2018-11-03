@@ -1,4 +1,6 @@
-import React, { Fragment, useState } from 'react';
+import React, { useState, Fragment } from 'react';
+import { over, lensProp } from 'ramda';
+
 import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
 import List from '@material-ui/core/List';
@@ -13,66 +15,77 @@ import RemoveIcon from '@material-ui/icons/Remove';
 
 import { useRecordList } from './helpers';
 
-const Fight = () => {
+const Counter = ({ count, increment, decrement }) => (
+  <div>
+    <Button onClick={decrement}>
+      <RemoveIcon />
+    </Button>
+    {count}
+    <Button onClick={increment}>
+      <AddIcon />
+    </Button>
+  </div>
+);
+
+const Opponent = ({ opponent, overOpponent }) => {
+  return (
+    <ListItem>
+      <ListItemText>{opponent.name}</ListItemText>
+      <ListItemSecondaryAction>
+        <Counter
+          count={opponent.count}
+          increment={() => {
+            overOpponent(opponent, over(lensProp('count'), c => c + 1));
+          }}
+          decrement={() => {
+            overOpponent(
+              opponent,
+              over(lensProp('count'), c => Math.max(0, c - 1)),
+            );
+          }}
+        />
+      </ListItemSecondaryAction>
+    </ListItem>
+  );
+};
+
+const FightPreparation = () => {
   const [current, setCurrent] = useState('');
   const [opponents, addOpponent, _del, _set, overOpponent] = useRecordList([]);
+  const opponentsCount = opponents.reduce((count, o) => o.count + count, 0);
 
   return (
     <div>
       <Typography variant="h6" gutterBottom>
-        Fight
+        Fight Preparation
       </Typography>
       <Paper>
-        <TextField
-          label="name"
-          value={current}
-          variant="filled"
-          onChange={e => setCurrent(e.target.value)}
-        />
-        <Button
-          onClick={() => {
-            addOpponent({ name: current, count: 1 });
-            setCurrent('');
-          }}
-        >
-          add
-        </Button>
+        <div>
+          <TextField
+            value={current}
+            onChange={e => setCurrent(e.target.value)}
+          />
+          <Button
+            onClick={() => {
+              addOpponent({ name: current, count: 1 });
+              setCurrent('');
+            }}
+          >
+            add
+          </Button>
+        </div>
         <List>
           {opponents.map(opponent => (
             <Fragment key={opponent.name}>
-              <ListItem>
-                <ListItemText>{opponent.name}</ListItemText>
-                <ListItemSecondaryAction>
-                  <Button
-                    onClick={() =>
-                      overOpponent(opponent, o => {
-                        o.count = Math.max(0, o.count - 1);
-                        return o;
-                      })
-                    }
-                  >
-                    <RemoveIcon />
-                  </Button>
-                  {opponent.count}
-                  <Button
-                    onClick={() =>
-                      overOpponent(opponent, o => {
-                        o.count = o.count + 1;
-                        return o;
-                      })
-                    }
-                  >
-                    <AddIcon />
-                  </Button>
-                </ListItemSecondaryAction>
-              </ListItem>
+              <Opponent opponent={opponent} overOpponent={overOpponent} />
               <Divider />
             </Fragment>
           ))}
         </List>{' '}
       </Paper>
+      <Button disabled={opponentsCount < 1}>Start Fight</Button>
     </div>
   );
 };
 
-export default Fight;
+export default FightPreparation;
