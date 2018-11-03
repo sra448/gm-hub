@@ -1,6 +1,8 @@
 import { useReducer } from 'react';
 import { concat, lensIndex, lensPath, set } from 'ramda';
 
+// Custom hooks
+
 const itemsReducer = (items, action) => {
   const id = items.indexOf(action.item);
 
@@ -36,3 +38,12 @@ export const useRecordList = initialItems => {
 
   return [items.filter(x => x), addItem, setItem, removeItem];
 };
+
+// Helpers
+
+export const uuid = () =>
+  'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, c => {
+    const r = (Math.random() * 16) | 0;
+    const v = c == 'x' ? r : (r & 0x3) | 0x8;
+    return v.toString(16);
+  });

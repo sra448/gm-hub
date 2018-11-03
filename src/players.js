@@ -34,12 +34,12 @@ const Players = ({ players, onCreate, onChange, onRemove }) => {
       <div>
         {players.map(player => (
           <Player
-            key={player.uid}
+            key={player.id}
             {...player}
-            expanded={expandedPlayerId === player.uid}
+            expanded={expandedPlayerId === player.id}
             toggleExpanded={() =>
               setExpandedPlayerId(
-                player.uid !== expandedPlayerId ? player.uid : null,
+                player.id !== expandedPlayerId ? player.id : null,
               )
             }
             onChange={(prop, value) => onChange(player, prop, value)}

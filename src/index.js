@@ -1,7 +1,7 @@
 import React from 'react';
 import { render } from 'react-dom';
 
-import { useRecordList } from './helpers';
+import { useRecordList, uuid } from './helpers';
 import Players from './players';
 
 const defaultPlayer = {
@@ -18,7 +18,7 @@ const Main = () => {
       <h1>GM Hub</h1>
       <Players
         players={players}
-        onCreate={() => addPlayer(defaultPlayer)}
+        onCreate={() => addPlayer({ id: uuid(), ...defaultPlayer })}
         onChange={setPlayer}
         onRemove={removePlayer}
       />
