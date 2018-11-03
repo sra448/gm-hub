@@ -37,9 +37,9 @@ export const useRecordList = (initialItems = [], onChange) => {
     dispatch({ type: 'set', item, prop, value });
   };
 
-  onChange(items);
+  if (onChange) onChange(items);
 
-  return [items, addItem, setItem, removeItem];
+  return [items, addItem, removeItem, setItem];
 };
 
 // Helpers
