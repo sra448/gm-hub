@@ -4,8 +4,17 @@ import { render } from 'react-dom';
 import { useRecordList } from './helpers';
 import Players from './players';
 
+const initPlayers = JSON.parse(localStorage.getItem('players') || '[]');
+
+const onPlayersChange = players => {
+  localStorage.setItem('players', JSON.stringify(players));
+};
+
 const Main = () => {
-  const [players, addPlayer, setPlayer, removePlayer] = useRecordList([]);
+  const [players, addPlayer, setPlayer, removePlayer] = useRecordList(
+    initPlayers,
+    onPlayersChange,
+  );
 
   return (
     <div>

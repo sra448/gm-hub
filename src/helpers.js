@@ -21,8 +21,9 @@ const itemsReducer = (items, action) => {
   }
 };
 
-export const useRecordList = initialItems => {
-  const [items, dispatch] = useReducer(itemsReducer, initialItems || []);
+export const useRecordList = (initialItems = [], onChange) => {
+  const [internalItems, dispatch] = useReducer(itemsReducer, initialItems);
+  const items = internalItems.filter(x => x);
 
   const addItem = item => {
     dispatch({ type: 'add', item });
@@ -36,7 +37,9 @@ export const useRecordList = initialItems => {
     dispatch({ type: 'set', item, prop, value });
   };
 
-  return [items.filter(x => x), addItem, setItem, removeItem];
+  onChange(items);
+
+  return [items, addItem, setItem, removeItem];
 };
 
 // Helpers
