@@ -6,6 +6,10 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import Divider from '@material-ui/core/Divider';
+import TextField from '@material-ui/core/TextField';
+import Typography from '@material-ui/core/Typography';
+import AddIcon from '@material-ui/icons/Add';
+import RemoveIcon from '@material-ui/icons/Remove';
 
 import { useRecordList } from './helpers';
 
@@ -15,9 +19,16 @@ const Fight = () => {
 
   return (
     <div>
-      <h2>Fight</h2>
+      <Typography variant="h6" gutterBottom>
+        Fight
+      </Typography>
       <Paper>
-        <input value={current} onChange={e => setCurrent(e.target.value)} />
+        <TextField
+          label="name"
+          value={current}
+          variant="filled"
+          onChange={e => setCurrent(e.target.value)}
+        />
         <Button
           onClick={() => {
             addOpponent({ name: current, count: 1 });
@@ -40,7 +51,7 @@ const Fight = () => {
                       })
                     }
                   >
-                    -
+                    <RemoveIcon />
                   </Button>
                   {opponent.count}
                   <Button
@@ -51,7 +62,7 @@ const Fight = () => {
                       })
                     }
                   >
-                    +
+                    <AddIcon />
                   </Button>
                 </ListItemSecondaryAction>
               </ListItem>

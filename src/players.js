@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
+import Button from '@material-ui/core/Button';
 import ExpansionPanel from '@material-ui/core/ExpansionPanel';
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
+import TextField from '@material-ui/core/TextField';
+import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
 import { uuid } from './helpers';
@@ -19,19 +22,33 @@ const Player = props => {
   return (
     <ExpansionPanel expanded={expanded} onChange={toggleExpanded}>
       <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-        <div>{name || 'New Char'}</div>
-        <div>{ac}</div>
-        <div>{hp}</div>
+        <Typography variant="body1">{name || 'New Char'}</Typography>
+        <Typography variant="body1">{ac}</Typography>
+        <Typography variant="body1">{hp}</Typography>
       </ExpansionPanelSummary>
       <ExpansionPanelDetails>
-        <input
-          value={name}
-          onChange={e => onChange('name', e.target.value)}
-          autoFocus
-        />
-        <input value={ac} onChange={e => onChange('ac', e.target.value)} />
-        <input value={hp} onChange={e => onChange('hp', e.target.value)} />
-        <button onClick={onRemove}>remove</button>
+        <form>
+          <TextField
+            label="name"
+            value={name}
+            onChange={e => onChange('name', e.target.value)}
+            autoFocus
+            variant="filled"
+          />
+          <TextField
+            label="ac"
+            value={ac}
+            variant="filled"
+            onChange={e => onChange('ac', e.target.value)}
+          />
+          <TextField
+            label="hp"
+            value={hp}
+            variant="filled"
+            onChange={e => onChange('hp', e.target.value)}
+          />
+          <Button onClick={onRemove}>remove</Button>
+        </form>
       </ExpansionPanelDetails>
     </ExpansionPanel>
   );
@@ -52,7 +69,7 @@ const Players = ({ players, addPlayer, setPlayer, removePlayer }) => {
 
   return (
     <div>
-      <h2>Players</h2>
+      <Typography variant="h6">Players</Typography>
       <div>
         {players.map(player => (
           <Player
