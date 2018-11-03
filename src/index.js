@@ -1,13 +1,13 @@
-import React from "react";
-import { render } from "react-dom";
+import React from 'react';
+import { render } from 'react-dom';
 
-import { useRecordList } from "./helpers";
-import Players from "./players";
+import { useRecordList } from './helpers';
+import Players from './players';
 
 const defaultPlayer = {
-  name: "foo",
-  ac: "",
-  hp: ""
+  name: 'foo',
+  ac: '',
+  hp: '',
 };
 
 const Main = () => {
@@ -26,4 +26,4 @@ const Main = () => {
   );
 };
 
-render(<Main />, document.getElementById("main"));
+render(<Main />, document.getElementById('main'));

@@ -1,8 +1,8 @@
-import React, { useState } from "react";
-import ExpansionPanel from "@material-ui/core/ExpansionPanel";
-import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
-import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import React, { useState } from 'react';
+import ExpansionPanel from '@material-ui/core/ExpansionPanel';
+import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
+import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
 const Player = props => {
   const { name, ac, hp, expanded } = props;
@@ -16,16 +16,16 @@ const Player = props => {
         <div>{hp}</div>
       </ExpansionPanelSummary>
       <ExpansionPanelDetails>
-        <input value={name} onChange={e => onChange("name", e.target.value)} />
-        <input value={ac} onChange={e => onChange("ac", e.target.value)} />
-        <input value={hp} onChange={e => onChange("hp", e.target.value)} />
+        <input value={name} onChange={e => onChange('name', e.target.value)} />
+        <input value={ac} onChange={e => onChange('ac', e.target.value)} />
+        <input value={hp} onChange={e => onChange('hp', e.target.value)} />
         <button onClick={onRemove}>remove</button>
       </ExpansionPanelDetails>
     </ExpansionPanel>
   );
 };
 
-export default ({ players, onCreate, onChange, onRemove }) => {
+const Players = ({ players, onCreate, onChange, onRemove }) => {
   const [expandedPlayerId, setExpandedPlayerId] = useState();
 
   return (
@@ -39,7 +39,7 @@ export default ({ players, onCreate, onChange, onRemove }) => {
             expanded={expandedPlayerId === player.uid}
             toggleExpanded={() =>
               setExpandedPlayerId(
-                player.uid !== expandedPlayerId ? player.uid : null
+                player.uid !== expandedPlayerId ? player.uid : null,
               )
             }
             onChange={(prop, value) => onChange(player, prop, value)}
@@ -51,3 +51,5 @@ export default ({ players, onCreate, onChange, onRemove }) => {
     </div>
   );
 };
+
+export default Players;
