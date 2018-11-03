@@ -3,6 +3,7 @@ import { render } from 'react-dom';
 
 import { useRecordList } from './helpers';
 import Players from './players';
+import Fight from './fight';
 
 const initPlayers = JSON.parse(localStorage.getItem('players') || '[]');
 
@@ -11,7 +12,7 @@ const onPlayersChange = players => {
 };
 
 const Main = () => {
-  const [players, addPlayer, setPlayer, removePlayer] = useRecordList(
+  const [players, addPlayer, removePlayer, setPlayer] = useRecordList(
     initPlayers,
     onPlayersChange,
   );
@@ -25,6 +26,7 @@ const Main = () => {
         setPlayer={setPlayer}
         removePlayer={removePlayer}
       />
+      <Fight />
     </div>
   );
 };
