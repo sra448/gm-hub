@@ -1,5 +1,5 @@
 import { useReducer } from 'react';
-import { concat, lensIndex, lensPath, set } from 'ramda';
+import { concat, lensIndex, lensPath, set, over } from 'ramda';
 
 // Custom hooks
 
@@ -15,6 +15,9 @@ const itemsReducer = (items, action) => {
 
     case 'set':
       return set(lensPath([id, action.prop]), action.value, items);
+
+    case 'over':
+      return over(lensIndex(id), action.fn, items);
 
     default:
       return items;
@@ -37,9 +40,13 @@ export const useRecordList = (initialItems = [], onChange) => {
     dispatch({ type: 'set', item, prop, value });
   };
 
+  const overItem = (item, fn) => {
+    dispatch({ type: 'over', item, fn });
+  };
+
   if (onChange) onChange(items);
 
-  return [items, addItem, removeItem, setItem];
+  return [items, addItem, removeItem, setItem, overItem];
 };
 
 // Helpers
