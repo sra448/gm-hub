@@ -1,10 +1,23 @@
 import React, { useState, Fragment } from 'react';
-import { concat, set, over, lensProp, sortBy, prop, repeat } from 'ramda';
+import {
+  concat,
+  set,
+  over,
+  lensProp,
+  sortBy,
+  prop,
+  repeat,
+  drop,
+  take,
+  type,
+} from 'ramda';
 
+import Avatar from '@material-ui/core/Avatar';
 import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import Divider from '@material-ui/core/Divider';
@@ -119,7 +132,7 @@ const Initiative = ({ players, opponents, startFight }) => {
       ),
       playersWithInit.map(over(lensProp('init'), x => +x)),
     );
-    startFight(sortBy(prop('init'), fighters));
+    startFight(sortBy(x => -x.init, fighters));
   };
 
   return (
@@ -149,15 +162,29 @@ const Initiative = ({ players, opponents, startFight }) => {
 
 const BattleField = ({ fighters }) => {
   const [chars, _add, _del, setChar] = useRecordList(fighters);
+  const [currentCharId, setCurrentCharId] = useState(0);
+  const [roundId, setRoundId] = useState(1);
+  const charsInOrder = [
+    ...drop(currentCharId, chars),
+    ...take(currentCharId, chars),
+  ];
+
+  const onNext = () => {
+    if (currentCharId + 1 === chars.length) setRoundId(roundId + 1);
+    setCurrentCharId((currentCharId + 1) % chars.length);
+  };
 
   return (
     <div>
-      <Typography variant="h6">Battlefield</Typography>
+      <Typography variant="h6">Round {roundId}</Typography>
       <Paper>
         <List>
-          {chars.map(char => (
+          {charsInOrder.map(char => (
             <Fragment key={char.id}>
               <ListItem>
+                <ListItemIcon>
+                  <Avatar>{type(char.id) === 'String' ? 'P' : char.id}</Avatar>
+                </ListItemIcon>
                 <ListItemText>{char.name}</ListItemText>
               </ListItem>
               <Divider />
@@ -165,6 +192,11 @@ const BattleField = ({ fighters }) => {
           ))}
         </List>
       </Paper>
+      <div className="big-padding center">
+        <Button variant="contained" color="secondary" onClick={onNext}>
+          Next
+        </Button>
+      </div>
     </div>
   );
 };

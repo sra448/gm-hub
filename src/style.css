@@ -23,6 +23,7 @@ h1 {
   flex: 1 1;
   padding: 10px;
   background: #7b7788;
+  overflow: scroll;
 }
 
 .big-padding {
