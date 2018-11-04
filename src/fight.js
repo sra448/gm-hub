@@ -1,5 +1,5 @@
 import React, { useState, Fragment } from 'react';
-import { concat, set, over, lensProp, sortBy, prop, pipe, repeat } from 'ramda';
+import { concat, set, over, lensProp, sortBy, prop, repeat } from 'ramda';
 
 import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';

@@ -1,0 +1,21 @@
+html, body {
+  height: 100%;
+  padding: 0;
+  margin: 0;
+}
+
+#main {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.header, .footer {
+  flex: 0 0;
+}
+
+.body {
+  flex: 1;
+  padding: 10px;
+  background: #dcd2cf;
+}
