@@ -22,9 +22,9 @@ const Player = props => {
   return (
     <ExpansionPanel expanded={expanded} onChange={toggleExpanded}>
       <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-        <Typography variant="body1">{name || 'New Char'}</Typography>
-        <Typography variant="body1">{ac}</Typography>
-        <Typography variant="body1">{hp}</Typography>
+        <Typography>{name || 'New Char'}</Typography>
+        <Typography>{ac}</Typography>
+        <Typography>{hp}</Typography>
       </ExpansionPanelSummary>
       <ExpansionPanelDetails>
         <form>
@@ -82,7 +82,11 @@ const Players = ({ players, addPlayer, setPlayer, removePlayer }) => {
           />
         ))}
       </div>
-      <Button onClick={onCreate}>add player</Button>
+      <div className="big-padding center">
+        <Button variant="contained" onClick={onCreate}>
+          Add Player
+        </Button>
+      </div>
     </div>
   );
 };

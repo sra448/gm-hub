@@ -94,9 +94,16 @@ const FightPreparation = ({ startInit }) => {
         </List>
       </Paper>
 
-      <Button disabled={opponentsCount < 1} onClick={onStartInit}>
-        Start Initiative
-      </Button>
+      <div className="big-padding center">
+        <Button
+          variant="contained"
+          color="secondary"
+          disabled={opponentsCount < 1}
+          onClick={onStartInit}
+        >
+          Start Initiative
+        </Button>
+      </div>
     </div>
   );
 };
@@ -126,9 +133,16 @@ const Initiative = ({ players, opponents, startFight }) => {
           onChange={e => setPlayer(char, 'init', e.target.value)}
         />
       ))}
-      <Button disabled={!initSet} onClick={onStartFight}>
-        Start Fight
-      </Button>
+      <div className="big-padding center">
+        <Button
+          variant="contained"
+          color="secondary"
+          disabled={!initSet}
+          onClick={onStartFight}
+        >
+          Start Fight
+        </Button>
+      </div>
     </div>
   );
 };
@@ -138,14 +152,19 @@ const BattleField = ({ fighters }) => {
 
   return (
     <div>
-      {chars.map(char => (
-        <div key={char.id}>
-          <div>{char.id}</div>
-          <div>{char.init}</div>
-          <div>{char.name}</div>
-          <Divider />
-        </div>
-      ))}
+      <Typography variant="h6">Battlefield</Typography>
+      <Paper>
+        <List>
+          {chars.map(char => (
+            <Fragment key={char.id}>
+              <ListItem>
+                <ListItemText>{char.name}</ListItemText>
+              </ListItem>
+              <Divider />
+            </Fragment>
+          ))}
+        </List>
+      </Paper>
     </div>
   );
 };
