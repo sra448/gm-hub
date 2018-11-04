@@ -64,7 +64,9 @@ const Players = ({ players, addPlayer, setPlayer, removePlayer }) => {
   const onCreate = () => {
     const id = uuid();
     addPlayer({ id, ...defaultPlayer });
-    setExpandedPlayerId(id);
+    requestAnimationFrame(() => {
+      setExpandedPlayerId(id);
+    });
   };
 
   return (
