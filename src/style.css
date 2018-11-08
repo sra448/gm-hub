@@ -33,3 +33,13 @@ h1 {
 .center {
   text-align: center;
 }
+
+.current-player {
+  background: #fff9b4;
+}
+
+.floating-bottom-right {
+  position: fixed !important;
+  bottom: 85px;
+  right: 30px;
+}
